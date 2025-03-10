@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_fakeapi
+    restart: always
+    environment:
+      POSTGRES_DB: fakeapidb
+      POSTGRES_USER: fakeapiuser
+      POSTGRES_PASSWORD: fakeapipassword
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256 # Adicionado para garantir a autenticação correta
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fakeapiuser -d fakeapidb"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+
+  fakeapi:
+    build: .
+    container_name: fake_api_produto
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/fakeapidb
+      SPRING_DATASOURCE_USERNAME: fakeapiuser
+      SPRING_DATASOURCE_PASSWORD: fakeapipassword
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    restart: always
+
+volumes:
+  postgres_data:
