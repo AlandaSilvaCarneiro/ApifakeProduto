@@ -1,7 +1,7 @@
 package com.apiproduto.FakeApiProduto.Controller;
 
 
-import com.apiproduto.FakeApiProduto.Entity.Cliente;
+
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Conversor.ClienteConversor;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Requeste.DtosCliente;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Response.DtosClienteRespose;
@@ -10,19 +10,24 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/cliente")
 @RequiredArgsConstructor
 public class ControllerCliente {
     private final ServiceCliente serviceCliente;
-
     private final ClienteConversor clienteConversor;
+
+    Logger logger = LogManager.getLogger(ControllerCliente.class);
+
 
 
     @PostMapping
@@ -65,7 +70,7 @@ public class ControllerCliente {
     @Operation(description = "Endpoit responsavel por deletar um Clientes")
     @ApiResponses( value = {
             @ApiResponse(responseCode = "201", description = "Cliente deletado com sucesso com sucesso"),
-            // @ApiResponse(responseCode = "422", description = "Campos não atende aos requisitos "),
+            @ApiResponse(responseCode = "422", description = "Campos não atende aos requisitos "),
             @ApiResponse(responseCode = "400", description = "Erro de requisição"),
             @ApiResponse(responseCode = "500", description = "Erro interno no sevidor")})
 

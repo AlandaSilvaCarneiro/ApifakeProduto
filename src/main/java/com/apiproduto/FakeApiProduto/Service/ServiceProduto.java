@@ -2,6 +2,9 @@ package com.apiproduto.FakeApiProduto.Service;
 
 import com.apiproduto.FakeApiProduto.Entity.Categoria;
 import com.apiproduto.FakeApiProduto.Entity.Produto;
+import com.apiproduto.FakeApiProduto.Exeptions.ExceptionErroList;
+import com.apiproduto.FakeApiProduto.Exeptions.ExceptionSalveErro;
+import com.apiproduto.FakeApiProduto.Exeptions.ExecptionErroDeleteBy;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Conversor.ProdutoConver;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Requeste.DtosProduto;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Response.DtosProdutoResponse;
@@ -26,15 +29,24 @@ public class ServiceProduto {
     private final RepositoryCompra repositoryCompra;
 
     public DtosProdutoResponse salveProduto(DtosProduto dtosProduto){
-        return produtoConver.paraDtos(
-                respositoryProduto.save(
-                        produtoConver.paraEntity(dtosProduto)));
+        try {
+           var salveProd = respositoryProduto.save(produtoConver.paraEntity(dtosProduto));
+           return produtoConver.paraDtos(salveProd);
+        } catch (RuntimeException e) {
+            throw new ExceptionSalveErro("Erro no salvamento ", "Produto");
+        }
+
 
 
     }
 
     public List<DtosProdutoResponse> listaDeProduto(){
-        return  respositoryProduto.findAll().stream().map(produtoConver::paraDtos).toList();
+        try {
+            return  respositoryProduto.findAll().stream().map(produtoConver::paraDtos).toList();
+        } catch (RuntimeException e) {
+            throw new ExceptionErroList("Erro na geração da lista", "Produto");
+        }
+
     }
 
     public DtosProdutoResponse update(Long id , DtosProduto dtosProduto){
@@ -55,7 +67,12 @@ public class ServiceProduto {
     }
 
     public void deleteProduto(Long id){
-        respositoryProduto.deleteById(id);
+        try {
+            respositoryProduto.deleteById(id);
+        } catch (RuntimeException e) {
+            throw new ExecptionErroDeleteBy("Erro na deleção do ID","Fornecedor");
+        }
+
 
     }
 }

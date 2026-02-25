@@ -2,6 +2,9 @@ package com.apiproduto.FakeApiProduto.Service;
 
 
 import com.apiproduto.FakeApiProduto.Entity.Fornecedor;
+import com.apiproduto.FakeApiProduto.Exeptions.ExceptionErroList;
+import com.apiproduto.FakeApiProduto.Exeptions.ExceptionSalveErro;
+import com.apiproduto.FakeApiProduto.Exeptions.ExecptionErroDeleteBy;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Conversor.FornecedorConver;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Requeste.DtosFornecedor;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Response.DtosFornecedorResponse;
@@ -24,12 +27,21 @@ public class ServiceFornecedor {
 
 
     public List<DtosFornecedorResponse> listaFornecedor(){
+        try {
+            return repositoryFornecedor.findAll().stream().map(fornecedorConver::paraDtos).toList();
+        } catch (RuntimeException e) {
+            throw new ExceptionErroList("erro na geração da lista","Fornecedor");
+        }
 
-        return repositoryFornecedor.findAll().stream().map(fornecedorConver::paraDtos).toList();
     }
 
     public DtosFornecedorResponse salvaFornecedore(DtosFornecedor dtosFornecedor){
-       return fornecedorConver.paraDtos(repositoryFornecedor.save(fornecedorConver.paraEntity(dtosFornecedor)));
+        try {
+            var salveFronecedor= repositoryFornecedor.save(fornecedorConver.paraEntity(dtosFornecedor));
+            return fornecedorConver.paraDtos(salveFronecedor);
+        }catch (Exception e) {
+            throw new ExceptionSalveErro("Erro no salvamento","Fornecedor");
+        }
 
     }
 
@@ -54,7 +66,12 @@ public class ServiceFornecedor {
     }
 
     public void deleteFornecedor(Long id){
-        repositoryFornecedor.deleteById(id);
+        try {
+            repositoryFornecedor.deleteById(id);
+        } catch (RuntimeException e) {
+            throw new ExecptionErroDeleteBy("Erro na deleção do id","Fornecedor");
+        }
+
     }
 
 }

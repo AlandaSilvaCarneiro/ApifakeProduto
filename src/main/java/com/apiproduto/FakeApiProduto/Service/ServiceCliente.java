@@ -2,9 +2,11 @@ package com.apiproduto.FakeApiProduto.Service;
 
 
 import com.apiproduto.FakeApiProduto.Entity.Cliente;
-import com.apiproduto.FakeApiProduto.Entity.Compra;
+import com.apiproduto.FakeApiProduto.Exeptions.ExceptionErroList;
+import com.apiproduto.FakeApiProduto.Exeptions.ExceptionSalveErro;
+import com.apiproduto.FakeApiProduto.Exeptions.ExceptionCpfErro;
+import com.apiproduto.FakeApiProduto.Exeptions.ExecptionErroDeleteBy;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Conversor.ClienteConversor;
-import com.apiproduto.FakeApiProduto.Infra.Dtos.Conversor.CompraConver;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Requeste.DtosCliente;
 import com.apiproduto.FakeApiProduto.Infra.Dtos.Response.DtosClienteRespose;
 import com.apiproduto.FakeApiProduto.Respository.RepositoryCliente;
@@ -24,8 +26,13 @@ public class ServiceCliente {
 
     private  final RepositoryCompra repositoryCompra;
     public DtosClienteRespose salve(Cliente cliente){
-        return clienteConversor.paraDto(
-                repositoryCliente.save(cliente));
+    try {
+        repositoryCliente.save(cliente);
+        return clienteConversor.paraDto(cliente);
+    }catch (RuntimeException e){
+        throw new ExceptionSalveErro("erro ao salva ", "cliente");
+    }
+
 
     }
 
@@ -33,8 +40,8 @@ public class ServiceCliente {
         Cliente clieteupdate;
         try {
             clieteupdate = repositoryCliente.findById(id).orElseThrow(()-> new RuntimeException("cpf não encotrado"));
-        }catch(Exception ExeptionCpf){
-            throw  new RuntimeException("o cpf do cliente não foi encontrado");
+        }catch(RuntimeException e ){
+            throw  new ExceptionCpfErro("o cpf do cliente não foi encontrado","cliente");
         }
 
         clieteupdate.setCartao_cliente(cliente.cartaoCliente());
@@ -52,14 +59,25 @@ public class ServiceCliente {
 
     public List<DtosClienteRespose> listaCliente(){
 
-        return repositoryCliente.findAll().
-                stream().
-                map(Cliente -> clienteConversor.paraDto(Cliente)).toList();
-
+        try {
+            return repositoryCliente.findAll().
+                    stream().
+                    map(clienteConversor::paraDto).toList();
+        } catch (RuntimeException e) {
+            throw new ExceptionErroList("Erro na busca da lista", "cliente");
+        }
     }
 
     public  void deltecliente(Long id){
-        repositoryCliente.deleteById(id);
+
+        if (repositoryCliente.existsById(id)){
+            repositoryCliente.deleteById(id);
+
+        }else{
+            throw new ExecptionErroDeleteBy("erro na deleção por id", "cliente");
+        }
+        }
+
 
     }
-}
+
