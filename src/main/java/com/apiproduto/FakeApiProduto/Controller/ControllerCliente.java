@@ -39,8 +39,11 @@ public class ControllerCliente {
         @ApiResponse(responseCode = "500", description = "Erro interno no sevidor")
     })
     public ResponseEntity<DtosClienteRespose> salveCliente(@RequestBody DtosCliente dtosCliente){
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                serviceCliente.salve(clienteConversor.paraEntity(dtosCliente)));
+        logger.info("Inicinado o processo de salvameneto");
+
+               var clineteReturn = serviceCliente.salve(clienteConversor.paraEntity(dtosCliente));
+               logger.info("processo de salva,emto terminado com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body(clineteReturn);
     }
 
     @PutMapping("/upate/{id}")

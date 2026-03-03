@@ -11,6 +11,8 @@ import com.apiproduto.FakeApiProduto.Infra.Dtos.Response.DtosFornecedorResponse;
 import com.apiproduto.FakeApiProduto.Respository.RepositoryFornecedor;
 import com.apiproduto.FakeApiProduto.Respository.RepositoryProduto;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,11 +27,14 @@ public class ServiceFornecedor {
 
     private final RepositoryProduto repositoryProduto;
 
+    Logger loggerfornecedo = LoggerFactory.getLogger(ServiceCompra.class);
+
 
     public List<DtosFornecedorResponse> listaFornecedor(){
         try {
             return repositoryFornecedor.findAll().stream().map(fornecedorConver::paraDtos).toList();
         } catch (RuntimeException e) {
+            loggerfornecedo.error("erro na listagem  de fornecedores");
             throw new ExceptionErroList("erro na geração da lista","Fornecedor");
         }
 
@@ -40,6 +45,7 @@ public class ServiceFornecedor {
             var salveFronecedor= repositoryFornecedor.save(fornecedorConver.paraEntity(dtosFornecedor));
             return fornecedorConver.paraDtos(salveFronecedor);
         }catch (Exception e) {
+            loggerfornecedo.error("erro no salvamneto de fornecedores");
             throw new ExceptionSalveErro("Erro no salvamento","Fornecedor");
         }
 
@@ -50,6 +56,7 @@ public class ServiceFornecedor {
        try {
            fornecedorUpdate = repositoryFornecedor.findById(id).orElseThrow(()-> new RuntimeException("Erro na busca da referencia do id de ofrnecedor no metodo update"));
        }catch (RuntimeException IdErroBusca){
+           loggerfornecedo.error("erro no update de fornecedor");
            throw  new RuntimeException("Erro  na busca do fornecedor no banco de dados, que seria feiro no metodo update");
        }
        fornecedorUpdate.setFornecedor_nome(dtosFornecedor.fornecedorNome());
@@ -69,6 +76,7 @@ public class ServiceFornecedor {
         try {
             repositoryFornecedor.deleteById(id);
         } catch (RuntimeException e) {
+            loggerfornecedo.error("erro na deleção do id de fornecedor");
             throw new ExecptionErroDeleteBy("Erro na deleção do id","Fornecedor");
         }
 

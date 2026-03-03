@@ -1,0 +1,79 @@
+2026-02-26T13:23:47,351 INFO  com.apiproduto.FakeApiProduto.FakeApiProdutoApplicationTests - Starting FakeApiProdutoApplicationTests using Java 21.0.10 with PID 10336 (started by alanc in C:\Users\alanc\OneDrive\Desktop\projetos Spring boot\ApifakeProduto)
+2026-02-26T13:23:47,365 DEBUG com.apiproduto.FakeApiProduto.FakeApiProdutoApplicationTests - Running with Spring Boot v3.4.2, Spring v6.2.2
+2026-02-26T13:23:47,367 INFO  com.apiproduto.FakeApiProduto.FakeApiProdutoApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2026-02-26T13:23:49,076 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-26T13:23:49,199 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 97 ms. Found 4 JPA repository interfaces.
+2026-02-26T13:23:50,508 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-26T13:23:50,684 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-02-26T13:23:50,768 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-02-26T13:23:51,177 INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-26T13:23:51,209 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-26T13:23:51,416 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@57e57dc5
+2026-02-26T13:23:51,418 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-26T13:23:51,456 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-26T13:23:51,491 INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.12
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-26T13:23:52,820 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-26T13:23:53,238 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-26T13:23:55,014 INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2026-02-26T13:23:55,147 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-26T13:23:55,276 INFO  org.springframework.validation.beanvalidation.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-02-26T13:23:56,449 INFO  com.apiproduto.FakeApiProduto.FakeApiProdutoApplicationTests - Started FakeApiProdutoApplicationTests in 9.683 seconds (process running for 11.47)
+2026-02-26T13:23:57,931 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-26T13:23:57,939 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-26T13:23:57,955 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-02-26T13:26:15,627 INFO  com.apiproduto.FakeApiProduto.FakeApiProdutoApplication - Starting FakeApiProdutoApplication using Java 21.0.10 with PID 8512 (C:\Users\alanc\OneDrive\Desktop\projetos Spring boot\ApifakeProduto\target\classes started by alanc in C:\Users\alanc\OneDrive\Desktop\projetos Spring boot\ApifakeProduto)
+2026-02-26T13:26:15,635 DEBUG com.apiproduto.FakeApiProduto.FakeApiProdutoApplication - Running with Spring Boot v3.4.2, Spring v6.2.2
+2026-02-26T13:26:15,636 INFO  com.apiproduto.FakeApiProduto.FakeApiProdutoApplication - No active profile set, falling back to 1 default profile: "default"
+2026-02-26T13:26:16,878 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-02-26T13:26:16,943 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 54 ms. Found 4 JPA repository interfaces.
+2026-02-26T13:26:17,626 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2026-02-26T13:26:17,646 INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-0.0.0.0-8080"]
+2026-02-26T13:26:17,648 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-02-26T13:26:17,648 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-02-26T13:26:17,704 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-02-26T13:26:17,704 INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2022 ms
+2026-02-26T13:26:18,017 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-02-26T13:26:18,077 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.5.Final
+2026-02-26T13:26:18,107 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-02-26T13:26:18,350 INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-02-26T13:26:18,381 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-26T13:26:18,531 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7a51dc38
+2026-02-26T13:26:18,533 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-26T13:26:18,564 WARN  org.hibernate.orm.deprecation - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-02-26T13:26:18,589 INFO  org.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 16.12
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-02-26T13:26:19,574 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-02-26T13:26:20,028 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-02-26T13:26:20,903 INFO  org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver - Exposing 14 endpoints beneath base path '/actuator'
+2026-02-26T13:26:20,973 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-02-26T13:26:21,033 INFO  org.springframework.validation.beanvalidation.OptionalValidatorFactoryBean - Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-02-26T13:26:21,771 INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-0.0.0.0-8080"]
+2026-02-26T13:26:21,788 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2026-02-26T13:26:21,801 INFO  com.apiproduto.FakeApiProduto.FakeApiProdutoApplication - Started FakeApiProdutoApplication in 6.776 seconds (process running for 8.002)
+2026-02-26T13:26:22,276 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-02-26T13:26:22,277 INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-02-26T13:26:22,281 INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2026-02-26T13:26:53,291 INFO  com.apiproduto.FakeApiProduto.Controller.ControllerCliente - Inicinado o processo de salvameneto
+2026-02-26T13:26:53,292 INFO  com.apiproduto.FakeApiProduto.Service.ServiceCliente - Chamanto o metodo de salvamneto no service cliente
+2026-02-26T13:26:53,373 WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: 23505
+2026-02-26T13:26:53,373 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper - ERROR: duplicate key value violates unique constraint "ukhdsyk3rjke9qjit8hmcqvvmh0"
+  Detalhe: Key (cpf_cliente)=(11122233344) already exists.
+2026-02-26T13:26:53,386 ERROR com.apiproduto.FakeApiProduto.Service.ServiceCliente - erro no salvameneto do cliente
+2026-02-26T13:28:39,325 INFO  org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-26T13:28:39,335 INFO  org.springframework.boot.web.embedded.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-02-26T13:28:39,343 INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-02-26T13:28:39,346 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-02-26T13:28:39,349 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

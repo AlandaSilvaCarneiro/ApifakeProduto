@@ -12,6 +12,8 @@ import com.apiproduto.FakeApiProduto.Respository.RepositoryCompra;
 import com.apiproduto.FakeApiProduto.Respository.RepositoryFornecedor;
 import com.apiproduto.FakeApiProduto.Respository.RepositoryProduto;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,11 +30,14 @@ public class ServiceProduto {
 
     private final RepositoryCompra repositoryCompra;
 
+    Logger loggerSericeProduto = LoggerFactory.getLogger(ServiceProduto.class);
+
     public DtosProdutoResponse salveProduto(DtosProduto dtosProduto){
         try {
            var salveProd = respositoryProduto.save(produtoConver.paraEntity(dtosProduto));
            return produtoConver.paraDtos(salveProd);
         } catch (RuntimeException e) {
+            loggerSericeProduto.error("erro no salvamneto de produto");
             throw new ExceptionSalveErro("Erro no salvamento ", "Produto");
         }
 
@@ -44,6 +49,7 @@ public class ServiceProduto {
         try {
             return  respositoryProduto.findAll().stream().map(produtoConver::paraDtos).toList();
         } catch (RuntimeException e) {
+            loggerSericeProduto.error("erro na listagem de produtos");
             throw new ExceptionErroList("Erro na geração da lista", "Produto");
         }
 
@@ -54,6 +60,7 @@ public class ServiceProduto {
         try {
             produto = respositoryProduto.findById(id).orElseThrow(() -> new RuntimeException("Id no update de Produto(id do produto) não encontrado"));
         }catch (RuntimeException IdErro){
+            loggerSericeProduto.error("erro no update de produto");
             throw new RuntimeException("Erro na busca do id para pegar a referencia de um produto no banco(no metodo uodate de produto)");
         }
         produto.setNome_produto(dtosProduto.nomeProduto());
@@ -70,6 +77,7 @@ public class ServiceProduto {
         try {
             respositoryProduto.deleteById(id);
         } catch (RuntimeException e) {
+            loggerSericeProduto.error("erro  na deleção de produto");
             throw new ExecptionErroDeleteBy("Erro na deleção do ID","Fornecedor");
         }
 

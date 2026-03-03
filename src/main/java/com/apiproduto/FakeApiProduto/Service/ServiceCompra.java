@@ -13,6 +13,8 @@ import com.apiproduto.FakeApiProduto.Respository.RepositoryCliente;
 import com.apiproduto.FakeApiProduto.Respository.RepositoryCompra;
 import com.apiproduto.FakeApiProduto.Respository.RepositoryProduto;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,11 +32,14 @@ public class ServiceCompra {
 
     private final CompraConver compraConver;
 
+    Logger logger = LoggerFactory.getLogger(ServiceCompra.class);
+
 
     public List<DtosCompraResponse> listaCompra(){
         try {
             return  repositoryCompra.findAll().stream().map(compraConver::paraDtos).toList();
         } catch (RuntimeException e) {
+            logger.error("erro na listagem das compras");
             throw new ExceptionErroList("Erro na chamada da lista ", "compra");
 
         }
@@ -48,6 +53,7 @@ public class ServiceCompra {
             var listaCompra = repositoryCompra.save(compraConver.paraEntity(dtosCompra));
             return compraConver.paraDtos(listaCompra);
         } catch (RuntimeException e) {
+            logger.error("erro no salvamneto da compra");
             throw new ExceptionSalveErro("erro no salvamento","compra");
         }
 
@@ -58,6 +64,7 @@ public class ServiceCompra {
         try {
             updateCompra = repositoryCompra.getReferenceById(id);
         }catch (Exception e){
+            logger.error("erro no update das compras");
            throw  new RuntimeException("Id do update de compra não encontrado") ;
         }
            // updateCompra.setPreco_compra(compra.precoCompra());
@@ -76,6 +83,7 @@ public class ServiceCompra {
         try {
             repositoryCompra.deleteById(idCompra);
         } catch (Exception e) {
+            logger.error("erro na deleção da compra ");
             throw new ExecptionErroDeleteBy("Erro na deleção","compra");
         }
 

@@ -12,6 +12,8 @@ import com.apiproduto.FakeApiProduto.Infra.Dtos.Response.DtosClienteRespose;
 import com.apiproduto.FakeApiProduto.Respository.RepositoryCliente;
 import com.apiproduto.FakeApiProduto.Respository.RepositoryCompra;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,17 +22,25 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ServiceCliente {
+
     private final RepositoryCliente repositoryCliente;
+    Logger logger = LoggerFactory.getLogger(ServiceCliente.class);
 
     private final ClienteConversor clienteConversor;
 
     private  final RepositoryCompra repositoryCompra;
     public DtosClienteRespose salve(Cliente cliente){
+        logger.info("Chamanto o metodo de salvamneto no service cliente");
     try {
+
         repositoryCliente.save(cliente);
+        logger.info("cliente salvo com sucesso +",cliente.getNome_cliente());
         return clienteConversor.paraDto(cliente);
     }catch (RuntimeException e){
+        logger.error("erro no salvameneto do cliente",cliente.getNome_cliente());
         throw new ExceptionSalveErro("erro ao salva ", "cliente");
+
+
     }
 
 
@@ -41,6 +51,7 @@ public class ServiceCliente {
         try {
             clieteupdate = repositoryCliente.findById(id).orElseThrow(()-> new RuntimeException("cpf não encotrado"));
         }catch(RuntimeException e ){
+            logger.error("erro no update do cleinte");
             throw  new ExceptionCpfErro("o cpf do cliente não foi encontrado","cliente");
         }
 
@@ -64,6 +75,7 @@ public class ServiceCliente {
                     stream().
                     map(clienteConversor::paraDto).toList();
         } catch (RuntimeException e) {
+            logger.error("erro na listagem dos clientes");
             throw new ExceptionErroList("Erro na busca da lista", "cliente");
         }
     }
@@ -74,7 +86,10 @@ public class ServiceCliente {
             repositoryCliente.deleteById(id);
 
         }else{
+            logger.error("na deleção do id");
             throw new ExecptionErroDeleteBy("erro na deleção por id", "cliente");
+
+
         }
         }
 
